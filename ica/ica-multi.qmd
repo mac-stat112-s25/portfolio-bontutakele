@@ -3,3 +3,196 @@ title: "Mulivariate Viz"
 ---
 
 Use this file for practice with the **mulivariate viz** in-class activity.  Refer to the class website for details.
+
+
+```{r}
+library(tidyverse)
+
+# Import data
+weather <- read.csv("https://mac-stat.github.io/data/weather_3_locations.csv") |> 
+  mutate(date = as.Date(date))  
+
+# Check out the first 6 rows
+# What are the units of observation?
+# Dates
+head(weather)
+
+# How many data points do we have? 
+# 2367
+tail(weather)
+
+# What type of variables do we have?
+# Categorical and quantitative variables are in this dataset
+class("location")
+class("mintemp")
+class("windspeed9am")
+unique(weather$location)
+```
+
+
+## Example 1
+
+```{r}
+ggplot(weather, aes(x = temp3pm)) +
+  geom_histogram()
+```
+
+
+## Example 2
+
+How do afternoon temperatures (temp3pm) differ by location?
+```{r}
+# Plot 1 (no facets & starting from a density plot of temp3pm)
+ggplot(weather, aes(x = temp3pm, fill = location)) + 
+  geom_density()
+```
+
+```{r}
+# Plot 2 (no facets or densities)
+ggplot(weather, aes(x = location, y = temp3pm)) +
+  geom_boxplot()
+```
+
+```{r}
+# Plot 3 (facets)
+ggplot(weather, aes(x = location, y = temp3pm)) +
+  geom_boxplot() +
+  facet_wrap(~ location)
+```
+
+
+## Example 3
+
+```{r}
+# Don't worry about the syntax (we'll learn it soon)
+woll <- weather |>
+  filter(location == "Wollongong") |> 
+  mutate(date = as.Date(date))  
+```
+
+```{r}
+# How often does it rain today? 
+# Not often
+# Fill your geometric layer with the color blue.
+ggplot(woll, aes(x = raintoday)) +
+  geom_bar(fill = "blue")
+```
+
+```{r}
+# If it does raintoday, what does this tell us about raintomorrow?
+# If it does raintoday, there is an equal chance of raintomorrow. If it does not raintoday, there is a bigger chance it will not raintomorrow than it would
+# Use your intuition first
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar()
+```
+
+```{r}
+# Now compare different approaches
+
+# Default: stacked bars
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar()
+```
+
+```{r}
+# Side-by-side bars
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "dodge")
+```
+
+```{r}
+# Proportional bars
+# position = "fill" refers to filling the frame, nothing to do with the color-related fill
+ggplot(woll, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "fill")
+```
+
+
+## Example 4
+
+Construct a plot that illustrates how 3pm temperatures (temp3pm) vary by date in Wollongong. Represent each day on the plot and use a curve/line to help highlight the trends.
+```{r}
+# THINK: What variable goes on the y-axis?
+# For the curve, try adding span = 0.5 to tweak the curvature
+ggplot(woll, aes(x = date, y = temp3pm)) +
+  geom_point() +
+  geom_smooth(span = .5)
+```
+
+```{r}
+# Instead of a curve that captures the general TREND,
+# draw a line that illustrates the movement of RAW temperatures from day to day
+# NOTE: We haven't learned this geom yet! Guess.
+ggplot(woll, aes(y = temp3pm, x = date)) 
+```
+
+New Stuff
+
+- How does the relationship between raintoday and raintomorrow vary by location?
+
+- How does the behavior of temp3pm over date vary by location?
+
+
+## Example 5 
+
+```{r}
+# Plot temp3pm vs temp9am
+# Change the code in order to indicate the location to which each data point corresponds
+ggplot(weather, aes(y = temp3pm, x = temp9am)) + 
+  geom_text(aes(label = location))
+```
+
+```{r}
+# Change the code in order to indicate the location to which each data point corresponds
+# AND identify the days on which it rained / didn't raintoday
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = raintoday)) + 
+  geom_text(aes(label = location))
+```
+
+```{r}
+# How many ways can you think to make that plot of temp3pm vs temp9am with info about location and rain?
+# Play around!
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + 
+  geom_text(aes(label = raintoday))
+```
+
+
+## Exercise 6
+
+```{r}
+# Change the code in order to construct a line plot of temp3pm vs date for each separate location (no points!)
+# wtf
+ggplot(weather, aes(y = temp3pm, x = date, fill = location)) + 
+  geom_point() +
+  geom_smooth(span = .5)
+```
+
+
+## Example 7
+
+```{r}
+# Plot the relationship of raintomorrow & raintoday
+# Change the code in order to indicate this relationship by location
+ggplot(weather, aes(x = raintoday, fill = raintomorrow)) + 
+  geom_bar(position = "fill") +
+  facet_wrap(~ location)
+```
+
+
+## Exercise
+
+```{r}
+# Import and check out data
+education <- read.csv("https://mac-stat.github.io/data/sat.csv")
+head(education)
+```
+
+
+
+
+```{r}
+ggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) + 
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm")
+```
+

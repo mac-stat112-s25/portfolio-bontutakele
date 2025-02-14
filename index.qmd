@@ -21,19 +21,57 @@ install.packages(setdiff(packages, rownames(installed.packages())), repos = "htt
 #| echo: false
 #| message: false
 
-lapply(packages, require, character.only = TRUE)
+# lapply(packages, require, character.only = TRUE)
 ```
 
 ```{r}
 #| output: false
 #| echo: false
 
-ds <- read.csv(here("data", "msg.csv"))
+# ds <- read.csv(here("data", "msg.csv"))
 ```
 
 ```{r}
 #| echo: false
 
-wordcloud2(data = ds, shape = "cardioid")
+# wordcloud2(data = ds, shape = "cardioid")
 ```
 
+```{r exercise 7}
+age <- 23
+age
+agein17 <- age + 17
+agein17
+```
+
+```{r exercise 8}
+seq(from=1,to=9,by=2)
+seq(from = 1, to=9,by=2)
+my_output <- -13
+thisisthetemperaturetodayincelsius <- -13
+this_is_the_temperature_today_in_celsius <- -13
+
+# BAD: tough to read
+seq(from=1,to=9,by=2)
+
+# GOOD: spaces between "words" and punctuation helps
+seq(from = 1, to = 9, by = 2)
+
+# BAD: too smooshy and hard to read
+degreescelsius <- -13
+
+# BETTER but not the R-way of naming variables
+# Why is it called camel case?
+degreesCelsius <- -13
+
+# BETTER
+degrees_celsius <- -13
+
+#1_18_24_degrees_c <- -13
+#_degrees_c <- -13
+#Jan/18/24/degrees <- -13
+```
+
+```{r}
+library(tidyverse)
+```

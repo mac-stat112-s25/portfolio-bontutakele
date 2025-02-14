@@ -3,3 +3,68 @@ title: "Spatial Viz"
 ---
 
 Use this file for practice with the **spatial viz** in-class activity.  Refer to the class website for details.
+
+
+```{r}
+install.packages(c("sf", "maps", "RColorBrewer", "gplots", "socviz", "leaflet", "devtools"))
+devtools::install_github("ropensci/rnaturalearthhires")
+```
+
+```{r}
+# Load tidyverse package for plotting and wrangling
+library(tidyverse)
+
+# Import the data and only keep 2 addresses
+energy <- read.csv("https://mac-stat.github.io/data/MacNaturalGas.csv") |> 
+  mutate(date = as.Date(paste0(month, "/1/", year), "%m/%d/%Y")) |> 
+  filter(address != "c")
+
+# Check it out
+head(energy)
+```
+
+
+## Example 1 - 5
+
+```{r}
+# Example 1
+class(energy$month)
+ggplot(energy, aes(x = month, y = therms)) + 
+  geom_point()
+```
+
+
+
+Therms ranged from 3 to 473. Jan: 305-425, Feb: 62-120, Mar: 839-908, Apr: 208-443, May: 286-473, Jun: 218-385, Jul: 104-218, Aug: 102-271, Sep: 3-91, Oct: 3-21, Nov: 9-21, Dec: 12-42
+
+Typical: 
+
+```{r}
+# Difference by address
+# Both addresses average around the same energy usage, but address a has a few that are higher
+ggplot(energy, aes(x = address, y = therms)) + 
+  geom_boxplot()
+```
+
+```{r}
+# Example 2 
+# Hard to tell, they don't overlap until halfway thorugh 2007. They both have the similar trend of having high energy use in the winter and lower in the summer
+ggplot(energy, aes(x = date, y = therms, col = address)) +
+  geom_point()
+```
+
+```{r}
+# Example 3
+# Energy use went up in both addresses after renovation
+ggplot(energy, aes(x = renovated, y = therms, col = address)) +
+  geom_boxplot()
+```
+
+
+## Exercise 1
+
+```{r}
+# Example 4
+
+```
+

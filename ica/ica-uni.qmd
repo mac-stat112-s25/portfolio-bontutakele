@@ -3,3 +3,255 @@ title: "Univariate Viz"
 ---
 
 Use this file for practice with the **univariate viz** in-class activity.  Refer to the class website for details.
+
+
+```{r}
+# Import data
+hikes <- read.csv("https://mac-stat.github.io/data/high_peaks.csv")
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+
+## Exercise 1
+
+```{r}
+head(hikes)
+# a. What features would we like a visualization of the categorical difficulty rating variable to capture? 
+# We would want to visualize all three of levels of the variable and the volume of observations in each level
+
+# b. What about a visualization of the quantitative elevation variable?
+# We would want a frame, layer, and scales so that there are axes that show the range of the integers that represent elevation.
+```
+
+## Exercise 2 
+
+```{r}
+# Use the ggplot function
+ggplot(hikes, aes(x = rating))
+library(tidyverse)
+```
+
+```{r}
+hikes %>% count(rating, sort = TRUE)
+# How many hikes fall into each category?
+# 27 moderate, 11 easy, 8 difficult
+
+# Are the hikes evenly distributed among these categories, or are some more common than others?
+# They are not evenly distributed. Most are moderate, least are difficult
+```
+
+## Exercise 4
+
+```{r}
+# This code adds bars representing the amount of hikes in each rating
+ggplot(hikes, aes(x = rating)) +
+  geom_bar()
+```
+
+```{r}
+# This adds labels to the x and y axes representing the ratings and amount of hikes in each rating
+ggplot(hikes, aes(x = rating)) +
+  geom_bar() +
+  labs(x = "Rating", y = "Number of hikes")
+```
+
+```{r}
+# This colors the bars blue
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(fill = "blue") +
+  labs(x = "Rating", y = "Number of hikes")
+```
+
+```{r}
+# This outlines the bars in orange
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(color = "orange", fill = "blue") +
+  labs(x = "Rating", y = "Number of hikes")
+```
+
+```{r}
+# This turns the background white and the gridlines gray
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(color = "orange", fill = "blue")  +
+  labs(x = "Rating", y = "Number of hikes") +
+  theme_minimal()
+```
+
+## Exercise 5
+
+Part a 
+
+- What’s the purpose of the +? When do we use it?
+The plus allows us to add different features to the plot, and are used whenever we use a new function
+
+- We added the bars using geom_bar()? Why “geom”? 
+Because it is a geometric element of the graph
+
+- What does labs() stand for?
+Labels
+
+- What’s the difference between color and fill? 
+Fill is for the whole solid color of the bar, color is for the outline
+
+
+Part b 
+
+- observed categories: What categories did we observe?
+We observed the ratings and the number of hikes (observations)
+
+- variability between categories: Are observations evenly spread out among the categories, or are some categories more common than others?
+The observations are not evenly distributed, with most being moderate, then easy, then difficult
+
+Summary: 
+The bar graph shows the number of hikes in each difficulty rating level. Moderate had the most, with 27 hikes, easy was next with 11, and difficult the least with 8.
+
+
+Part c
+
+Preferably, I would want the ratings to be in order, from easy to moderate to difficult, rather than it's current state, difficult, easy, moderate (from least to most hikes)
+
+## Exercise 6
+
+- Among the hikes, what’s the range of elevation and how are the hikes distributed within this range (e.g. evenly, in clumps, “normally”)?
+Hike elevations range from 3820 to 5344
+
+- What’s a typical elevation?
+
+
+- Are there any outliers, i.e. hikes that have unusually high or low elevations?
+
+```{r}
+ggplot(hikes, aes(x = elevation)) +
+  geom_bar(color = "red", fill = "darkgreen")  +
+  labs(x = "Elevation", y = "Number of hikes") +
+  theme_minimal()
+```
+This is not a good visualization for elevation because it is a quantitative variable, while rating is categorical. Bar graphs are best for variables with few categories, if a quantitative variable, there will be a bar created for each unique value 
+
+
+## Exercise 7 
+
+Part a
+
+- How many hikes have an elevation between 4500 and 4700 feet?
+6
+
+- How many total hikes have an elevation of at least 5100 feet? 
+2 
+
+Part b 
+typical outcome: Where’s the center of the data points? What’s typical?
+variability & range: How spread out are the outcomes? What are the max and min outcomes?
+shape: How are values distributed along the observed range? Is the distribution symmetric, right-skewed, left-skewed, bi-modal, or uniform (flat)?
+outliers: Are there any outliers, i.e. outcomes that are unusually large/small?
+
+Summary: The center is between 4225 and 4500 and typical is 4000. Hike elevations range from 3820 to 5344, The data is asymmetrical and right skewed, with most values being lower. The two values above 5000 may be unusually large. 
+
+
+## Exercise 8
+
+```{r}
+ggplot(hikes, aes(x = elevation))
+```
+
+
+## Exercise 9 
+
+```{r}
+# This adds the bars of the histogram representing the amount of hikes in certain ranges of elevation with the geom_histogram function
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram()
+```
+
+```{r}
+# This outlines the bars in white using the color argument within the geom_historgram function
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white") 
+```
+
+```{r}
+# This colors the bars blue with the fill argument inside the geom_histogram function
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", fill = "blue") 
+```
+
+```{r}
+# This renames the axes labels to represent the elevation (and the units it's measured in) and the number of hikes by adding the label function
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white") +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+```
+
+```{r}
+# This changes the range of each bar in the histogram to group hikes that have an elevation of 3500 to 4500 feet and 4500 to 5500 feet using the binwidth argument
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", binwidth = 1000) +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+```
+
+```{r}
+# This changes the range of each bar in the histogram to group hikes in ranging within 5 feet using the binwidth argument
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", binwidth = 5) +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+```
+
+```{r}
+# This changes the range of each bar in the histogram to group hikes in ranging within 200 feet using the binwidth argument. This is a good number to use between the past 2
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", binwidth = 200) +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+```
+
+
+## Exercise 10
+
+- What function added the histogram layer / geometry?
+The geom_histogram function
+
+- What’s the difference between color and fill?
+Color outlines the bar and fill fills in the bar
+
+- Why does adding color = "white" improve the visualization?
+It provides a border that indicates where the bar width starts and ends, so you know what the range of the measurement is for the observations in that bar
+
+- What did binwidth do?
+Changes the width of the bar 
+
+- Why does the histogram become ineffective if the binwidth is too big (e.g. 1000 feet)?
+It split the hikes into two groups that only shows those within 3500 to 4500 and 4500 to 5500, which hold a lot of hikes and doesn't tell us much about the different elevations
+
+- Why does the histogram become ineffective if the binwidth is too small (e.g. 5 feet)?
+This splits the hikes up into too many groups that basically just looks like the bar graph, showing almost each hike individually. This cannot be done with quantitative data
+
+
+## Exercise 11
+
+```{r}
+# geom_density(color = "blue")
+# geom_density(fill = "orange")
+# These functions will color the line blue and fill the space under the line orange
+ggplot(hikes, aes(x = elevation)) +
+  geom_density(color = "blue", fill = "orange")
+```
+
+
+## Exercise 12
+
+With a density plot, you don't need to split the elevation into groups, but allows for a smooth line that shows the proportion of hikes that reach a certain elevation. This can be a bit deceiving because it is like a line of best fit, in that there are some values of elevation that none of the hikes have. So it's kind of like the average density for elevation. 
+
+
+## Exercise 13 
+
+Including line breaks and indentations is good to know where the code first starts and where each additional line of code containing a new function for organization and knowing where everything is. Line breaks are especially good so that if a code doesn't work, we know which function stopped the code from working because it will work up until the line with the error 
+
+
+## Exercise 14
+
+
+
+

@@ -1,0 +1,42 @@
+---
+title: "ica-effect"
+format: html
+---
+
+
+## Exercise 1: Professionalism
+
+```{r}
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + 
+  geom_point()
+```
+
+
+# Part a
+```{r}
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + 
+  geom_point() + 
+  labs(x = "Temperature at 9am (C)", y = "Temperature at 3pm (C)", title = "Temperatures at 9am and 3pm (C) by Location", color = "Location")  
+```
+
+# Part b
+Point plot of temperatures at 9am and 3pm in 3 locations in Australia
+```{r}
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = location)) + 
+  geom_point() + 
+  labs(x = "Temperature at 9am (C)", y = "Temperature at 3pm (C)", title = "Temperatures at 9am and 3pm (C) by Location", color = "Location")  
+```
+Point plot of temperatures at 9am and 3pm in 3 locations in Australia
+
+
+## Exercise 2: Accessibilty
+
+```{r}
+ggplot(weather, aes(x = temp3pm, fill = location)) + 
+  geom_density(alpha = 0.5) + 
+  labs(x = "3pm temperature (Celsius)")  
+```
+
+
+
+

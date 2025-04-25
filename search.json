@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "COMP/STAT112 Notebook",
     "section": "",
-    "text": "Welcome\nWelcome to my online portfolio for COMP/STAT112 course taken at Macalester College. Please, use the side bar on the left for navigation.",
+    "text": "Welcome\nWelcome to my online portfolio for COMP/STAT112 course taken at Macalester College. Please, use the side bar on the left for navigation.\n\nage &lt;- 23\nage\n\n[1] 23\n\nagein17 &lt;- age + 17\nagein17\n\n[1] 40\n\n\n\nseq(from=1,to=9,by=2)\n\n[1] 1 3 5 7 9\n\nseq(from = 1, to=9,by=2)\n\n[1] 1 3 5 7 9\n\nmy_output &lt;- -13\nthisisthetemperaturetodayincelsius &lt;- -13\nthis_is_the_temperature_today_in_celsius &lt;- -13\n\n# BAD: tough to read\nseq(from=1,to=9,by=2)\n\n[1] 1 3 5 7 9\n\n# GOOD: spaces between \"words\" and punctuation helps\nseq(from = 1, to = 9, by = 2)\n\n[1] 1 3 5 7 9\n\n# BAD: too smooshy and hard to read\ndegreescelsius &lt;- -13\n\n# BETTER but not the R-way of naming variables\n# Why is it called camel case?\ndegreesCelsius &lt;- -13\n\n# BETTER\ndegrees_celsius &lt;- -13\n\n#1_18_24_degrees_c &lt;- -13\n#_degrees_c &lt;- -13\n#Jan/18/24/degrees &lt;- -13\n\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
     "crumbs": [
       "Welcome"
     ]
@@ -62,50 +62,6 @@
     "crumbs": [
       "Best Work",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Spatial Viz</span>"
-    ]
-  },
-  {
-    "objectID": "ica/ica-uni.html",
-    "href": "ica/ica-uni.html",
-    "title": "6  Univariate Viz",
-    "section": "",
-    "text": "Use this file for practice with the univariate viz in-class activity. Refer to the class website for details.",
-    "crumbs": [
-      "In-class Activities",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Univariate Viz</span>"
-    ]
-  },
-  {
-    "objectID": "ica/ica-bi.html",
-    "href": "ica/ica-bi.html",
-    "title": "7  Bivariate Viz",
-    "section": "",
-    "text": "Use this file for practice with the bivariate viz in-class activity. Refer to the class website for details.",
-    "crumbs": [
-      "In-class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Bivariate Viz</span>"
-    ]
-  },
-  {
-    "objectID": "ica/ica-multi.html",
-    "href": "ica/ica-multi.html",
-    "title": "8  Mulivariate Viz",
-    "section": "",
-    "text": "Use this file for practice with the mulivariate viz in-class activity. Refer to the class website for details.",
-    "crumbs": [
-      "In-class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Mulivariate Viz</span>"
-    ]
-  },
-  {
-    "objectID": "ica/ica-spatial.html",
-    "href": "ica/ica-spatial.html",
-    "title": "9  Spatial Viz",
-    "section": "",
-    "text": "Use this file for practice with the spatial viz in-class activity. Refer to the class website for details.",
-    "crumbs": [
-      "In-class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Spatial Viz</span>"
     ]
   }
 ]

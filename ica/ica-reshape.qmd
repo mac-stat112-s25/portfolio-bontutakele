@@ -1,0 +1,125 @@
+---
+title: "ica-reshape"
+format: html
+---
+
+10 Reshaping
+
+understanding reshaping data, wide & long data formats, use pivot_wider() & pivot_longer()
+
+#10.1 Review
+
+##Example 1: warm-up counts and proportions
+
+```{r}
+library(tidyverse)
+penguins <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv')
+```
+
+```{r}
+#Count # of male/female penguins by species 2 ways:
+#using count()
+penguins |>
+  count(species, sex)
+
+#using group_by() and summarize()
+penguins |>
+  group_by(species, sex) |>
+  summarize(n())
+
+
+#add column of proportion of male/female per species
+penguins |>
+  na.omit() |>
+  group_by(species,sex) |>
+  summarize(n = n()) |>
+  mutate(proportion = n/sum(n))
+#order of species, then sex matters
+```
+
+##Example 2: New Data
+
+```{r}
+penguin_avg <- penguins |>
+  group_by(species, sex) |>
+  summarize(avg_body_mass = mean(body_mass_g, na.rm = TRUE)) |>
+  na.omit()
+#average body mass of groups of penguins grouped by their species AND sex (male adelie, female adelie, male chinstrap, female chinstrap, male gentoo, female gentoo)
+```
+
+## Example 3: Units of Observation
+
+```{r}
+head(penguins)
+#units of observation: species, island, bill length, bill depth, flipper length, body mass, sex, year
+
+head(penguin_avg)
+#units of observation: species, sex, average body mass
+
+#reshaping the data did change the units of observation shown, resulting in the loss of island, bill length, bill depth, flipper length, body mass and year
+```
+
+
+#10.2 Reshaping Data
+
+2 types of reshaped data: 
+aggregate: using group_by() and summarize() gains aggregate info about units of obs. but losses data on individual observations
+raw data: retain all information on individual observations, but need to reshape for the task at hand
+
+##Example 4: Reshape it with your mind
+
+Wider vs. Longer Formats
+Changes the units while retaining all info
+
+1. Make the data LONGER combine values of multiple variables into one variable
+pivot_longer(data, cols = "#:#", names_to = "name", values_to = "value", values_drop_na = FALSE): "Lengthen" data by collapsing several columns into two. Column names move to a new "names_to" column and values to a new "values_to" column
+cols = the columns that we want collected into a single variable (can also do variables we DONT want)
+names_to = name of the new variable for the names of the collected variables
+values_to = name of the new variable for the values of the collected variables
+
+2. Make the data WIDER spread out the values across new variables
+pivot_wider(data, names_from = "name", values_from = "value"): The inverse of pivot_longer(). "Widen" data by expanding two columns into several. One column is new column names, one is the values
+names_from = variables whose values we want to seperate into their own columns, i.e., where we want to get the new columns NAMES FROM
+values_from = which variable to take the new column VALUES FROM
+
+##Example 5: pivot_wider()
+
+```{r}
+#goal: calculate difference in body mass
+#one row per species, seperate columns for body mass by sex
+penguin_avg |>
+  pivot_wider(names_from = sex, values_from = avg_body_mass)
+#units of obs: species, female, male
+#seems like no data was lost
+penguin_avg |>
+  pivot_wider(names_from = sex, values_from = avg_body_mass) |>
+  mutate(dif = male - female)
+```
+
+##Example 6: pivot_longer()
+
+```{r}
+penguin_avg_wide <- penguin_avg |>
+  pivot_wider(names_from = sex, values_from = avg_body_mass)
+```
+
+```{r}
+#pivot_longer()
+#revert wide back to long
+#usually when some variables are levels of one broader variable
+
+#1: communicate which variables we WANT into a single column (female, male)
+penguin_avg_wide |>
+  pivot_longer(cols = c(female, male), names_to = "sex", values_to = "avg_body_mass")
+
+#2: communicate which variables we DONT want into a single column (sex)
+penguin_avg_wide |>
+  pivot_longer(cols = -species, names_to = "sex", values_to = "avg_body_mass")
+
+#units: species, sex, average body mass
+#no data lost
+#we were making new names for new variables for our chosen variables, while pivot_wider names the columns based off of values that are already named
+```
+
+##Example 7: Practice
+

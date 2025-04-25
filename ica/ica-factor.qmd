@@ -1,0 +1,141 @@
+---
+title: "ica-factor"
+format: html
+---
+
+12 Factors
+
+Understand the difference between character and factor variables
+Be able to convert a character to a factor
+Develop comfort in manipulating the order and values of a factor
+
+
+#12.2 Factors
+
+Considerations of factors and characters
+1. Regular expressions: When working with characters strings, we might want to detect, replace or extract certain patterns.
+2. Converting characters to factors and factors to meaningful factors: When categorical info is stored as a character variable, the cateogires of interest may not be stored or ordered in a meaningful way
+
+
+##Example 1: Default Order
+
+```{r}
+library(tidyverse)
+elections <- read.csv("https://mac-stat.github.io/data/election_2020_county.csv") |> 
+  select(state_abbr, historical, county_name, total_votes_20, repub_pct_20, dem_pct_20) |> 
+  mutate(dem_support_20 = case_when(
+    (repub_pct_20 - dem_pct_20 >= 5) ~ "low",
+    (repub_pct_20 - dem_pct_20 <= -5) ~ "high",
+    .default = "medium"
+  ))
+
+# Check it out
+head(elections)  
+#variable dem_support_20
+#low = the Republican won the county by at least 5 percentage points
+#medium = the Republican and Democrat votes were within 5 percentage points
+#high = the Democrat won the county by at least 5 percentage points
+```
+
+```{r}
+ggplot(elections, aes(x = dem_support_20)) +
+  geom_bar()
+```
+
+```{r}
+elections |>
+  count(dem_support_20)
+#seems like there's a lot of counties with less dem support, but the 2020 election was won by a democrat, so the data isn't presenting reality
+```
+
+
+##Example 2: Change order using fct_relevel()
+
+R thinks of character strings as words with no meaningful order (why the levels of dem_support_20 are in alphabetical order)
+```{r}
+str(elections)
+```
+
+Use fct_relevel() to"
+1. Store dem_support_20 as factor variable, the levels of factor variables are recognized as specific levels/categories, not just words
+2. Specify a meaningful order for the levels of the factor variable
+```{r}
+elections <- elections |>
+  mutate(dem_support_20 = fct_relevel(dem_support_20, c("low", "medium", "high")))
+#New structure of dem_support_20 >
+str(elections)
+```
+
+```{r}
+#plot it
+ggplot(elections, aes(x = dem_support_20)) +
+  geom_bar()
+```
+
+
+##Example 3: Change Labels using fct_recode()
+
+We want to change the category labels
+```{r}
+#create new variable results_20 with new labels
+elections <- elections |>
+  mutate(results_20 = fct_recode(dem_support_20,
+                                 "strong republican" = "low", 
+                                 "close race" = "medium",
+                                 "strong democrat" = "high"))
+
+#still in meaningful order
+elections |>
+  count(results_20)
+```
+
+
+##Example 4: Re-order levels using fct_relevel()
+
+Explore how the Republican vote varied from county to county
+```{r}
+elections |>
+  ggplot(aes(x = repub_pct_20, fill = state_abbr)) +
+  geom_density(alpha = .5)
+```
+
+Too many density plots to compare, use a joy or ridge plot
+```{r}
+library(ggridges)
+elections |>
+  ggplot(aes(x = repub_pct_20, y = state_abbr, fill = historical)) +
+  geom_density_ridges() +
+  scale_fill_manual(values = c("blue", "purple", "red"))
+```
+^Alphabetical, reorder states according to Republican support
+
+
+##Example 5: Reorder levels based on another variable using fct_reorder()
+
+Reorder states according to median Republican support
+```{r}
+elections |>
+  mutate(state_abbr = fct_reorder(state_abbr, repub_pct_20, .fun = "median")) |>
+  ggplot(aes(x = repub_pct_20, y = state_abbr, fill = historical)) +
+  geom_density_ridges() +
+  scale_fill_manual(values = c("blue", "purple", "red"))
+```
+
+```{r}
+#reversed, using .desc = TRUE
+elections |> 
+  mutate(state_abbr = fct_reorder(state_abbr, repub_pct_20, .fun = "median", .desc = TRUE)) |> 
+  ggplot(aes(x = repub_pct_20, y = state_abbr, fill = historical)) + 
+    geom_density_ridges() + 
+    scale_fill_manual(values = c("blue", "purple", "red"))
+```
+
+#Summary
+
+forcats package within tidyverse is good for working with categorical variables
+Functions for changing order of factor levels:
+- fct_relevel() = manually reordering levels
+- fct_reorder() = reorder levels according to values from another variable
+
+Functions for changing the labels or values of factor levels
+- fct_recode() = manually change levels

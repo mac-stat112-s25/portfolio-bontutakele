@@ -37,6 +37,64 @@ ggplot(weather, aes(x = temp3pm, fill = location)) +
   labs(x = "3pm temperature (Celsius)")  
 ```
 
+# Part a
+```{r}
+ggplot(weather, aes(x = temp3pm, fill = location)) + 
+  geom_density(alpha = 0.5) + 
+  labs(x = "3pm temperature (Celsius)")  
+```
+
+# Part b
+Color shouldn't be the only dimension explaining the variable of location, maybe different opacities for each level would be better, as it accounts for all types of colorblindness
+
+# Part c
+```{r}
+ggplot(weather, aes(x = temp3pm, fill = location)) + 
+  geom_density(alpha = 0.5) + 
+  labs(x = "3pm temperature (Celsius)") + 
+  scale_fill_viridis_d()    
+```
+
+```{r}
+# In the color scale line:
+# Change "fill" to "color" since we use color in the aes()
+# Change "d" (discrete) to "c" (continuous) since maxtemp is on a continuous scale
+ggplot(weather, aes(y = temp3pm, x = temp9am, color = maxtemp)) + 
+  geom_point(alpha = 0.5) + 
+  labs(x = "3pm temperature (Celsius)") + 
+  scale_color_viridis_c()
+```
+
+
+## Exercise 3
+
+# Part a
+The climate change plot is unethical because it is bad visualization. It deceives the viewer to think that the climate isn't changing by making the range of the y-axis big, minimizing the change in temperature. The range for the years on the x-axis is also misleading, because recent global warming can be more comparable to pre-industrial era, and even in the pre-historic era, we would see that the change in temperature is the fastest the temperature has increased in the Earth's history.
+
+# Part b
+
+
+## Exercise 4: Critique
+World's Top 10 Best selling Cigarette Brands 2004 - 2007
+What story does the data graphic tell? What is the main message that you take away from it?
+It seems to show that Marlboro is the leading brand of cigarettes, with over $450 billion in sales, almost half of all total sales of all brands combined. The second leading brand has over $100 billion in sales, showing the stark lead Marlboro has on it's competitors
+
+Can the data graphic be described in terms of the Grammar of Graphics (frame, glyphs, aesthetics, facet, scale, guide)? If so, please describe.
+Frame: x and y coordinate graph
+Glyph: Column graph
+Aesthetics: y graph has categorical variables, x has numerical, variety of colors
+Facet: none
+Scales: Sales in billions on the x axis is in dollars, cigarette brands are on the right (10 levels), the bars extend from the y-axis to reach the amount of sales in each brand
+Guide: Title, axis labels
+
+Critique and/or praise the visualization choices made by the designer. Do they work? Are they misleading?
+Maybe see sales over the years, to see trends, whether Marlboro's dominance is relatively recent, and if any other brands are on the rise or fall.
+
+Thought-provoking? Are there things that you would have done differently?
+The choice of 2004-2007 is interesting and I wonder why that range was chosen, whether it's just due to how relevant the data is or if data collection had only just started in 2004.  Utilizing faceting to compare sales over the years would be a way to see what I mentioned in the previous question
+
+
+## Exercise 5: Design Details
 
 
 

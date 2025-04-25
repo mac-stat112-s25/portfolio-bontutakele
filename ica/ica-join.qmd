@@ -1,0 +1,362 @@
+---
+title: "ica-join"
+format: html
+---
+
+11 Joining
+
+#11.1 Review
+
+Data prep
+
+Mutating joins: left_join, inner_join, full_join
+Filtering joins: semi_join, anti_join
+
+#11.2 Motivation
+
+```{r}
+library(tidyverse)
+```
+
+
+##Example 1
+
+```{r}
+students_1 <- data.frame(
+  student = c("A", "B", "C"), 
+  class = c("STAT 101", "GEOL 101", "ANTH 101")
+)
+
+students_1
+```
+
+```{r}
+enrollments_1 <- data.frame(
+  class = c("STAT 101", "ART 101", "GEOL 101"),
+  enrollment = c(18,17,24)
+)
+
+enrollments_1
+```
+
+Key (what the 2 datasets have in common) is class
+
+students_1 has students, and value ANTH 101 in class that enrollments_1 doesn't
+enrollments_1 has enrollment and value ART 101 in class that students_1 doesn't
+
+
+#11.3 Mutating Joins: left, inner, full
+
+##Example 2
+
+```{r}
+#first way to join datasets: using left_join()
+library(tidyverse)
+students_1 |>
+  left_join(enrollments_1)
+
+#made one table with variables student, class and enrollment. students_1 seems to be a base? because of it's unique variable student, so all other value from enrollments_1 would have to match?
+#similarly, I think using enrollments_1 first would show the class values only from enrollment first, leaving the row with ART 101 have NA value for student
+
+enrollments_1 |>
+  left_join(students_1)
+```
+
+##Example 3
+
+```{r}
+#second way: inner_join()
+students_1 |>
+  inner_join(enrollments_1)
+
+#seems that inner_join() will only show values that are shared, so no ART 101, or ANTH 101, nor student C or enrollment value 17
+#I think it would show the same information just with enrollment first?
+
+enrollments_1 |>
+  inner_join(students_1)
+
+#*class first lol
+```
+
+##Example 4
+
+```{r}
+#third way: full_join()
+students_1 |>
+  full_join(enrollments_1)
+
+#all values of all variables are shown, resulting in NA values from each dataset
+#don't think info would change, except class first
+
+enrollments_1 |>
+  full_join(students_1)
+```
+
+
+#11.3.1 Summary
+
+Mutating joins adds new variables/columns to left data table from matching observations in right data table
+left_data |>
+  mutating_join(right_data)
+  
+- left_join(): all observations from the left, but discards any observations in the right that do not have a match in the left
+
+- inner_join(): only observations from the left with a match in the right
+
+- full_join(): all observations from the left and right tables
+
+
+#11.4 Filtering Joins: semi, anti
+
+Filtering joins keep only certain observations in one dataset, not based on any rules related to any variables in the dataset, but on observations that exist in another dataset. 
+Useful for when we merely care about membership or non-membership of an observation in the other dataset.
+
+##Example 5
+
+```{r}
+#suppose enrollments_1 included courses only being taught in the Theater building
+students_1 |>
+  semi_join(enrollments_1)
+#this excluded any columns that weren't shared between the two sets (in this case, it was enrollment), but kept students_1 first column. It also excluded values in the column not shared, ART 101 and ANTH 101, causing the value "C" to be excluded from the student column because the value ANTH 101 was not in the new dataset
+#if reversed, I think the same information in the class column would stay, the student column would be replaced with the enrollments column, with the value 17 being excluded because the value ART 101 won't be in the new dataset.
+
+enrollments_1 |>
+  semi_join(students_1)
+#*class first again lol
+```
+
+##Example 6
+
+```{r}
+students_1 |>
+  anti_join(enrollments_1)
+#seems to only show the values NOT shared between the two datasets. 
+#if reversed, I think it would be the same
+
+enrollments_1 |>
+  anti_join(students_1)
+#it seems to actually show the variables and values that the first dataset has that ISN'T shared with the second, along with other values in other variables that are in the same row as the value not shared
+```
+
+
+#11.4.1 Summary
+
+Filtering Joins keep specific observations from the left table based on whether they match an observation in the right table
+
+semi_join(): Discards any observations in the left table that do NOT have a match in the right table. If there are multiple matches of right cases to a left case, it keeps just one copy of the left case
+
+anti_join(): Discards any observations in the left table that DO have a match in the right table
+
+
+#11.5 Summary of All Joins
+
+See Joining tab in class website
+
+
+#11.6 Exercises
+
+##Exercise 1: Where are my keys?
+
+###Part a
+```{r}
+students_2 <- data.frame(
+  student = c("D", "E", "F"),
+  class = c("COMP 101", "BIOL 101", "POLI 101")
+)
+students_2
+```
+
+```{r}
+enrollments_2 <- data.frame(
+  course = c("ART 101", "BIOL 101", "COMP 101"), 
+  enrollment = c(18, 20, 19)
+)
+enrollments_2
+```
+
+```{r eval = FALSE}
+students_2 |>
+  left_join(enrollments_2)
+#no shared variables, can't left_join
+```
+
+###Part b
+```{r}
+#the key is labeled differently in the data sets: students_2 is called class, enrollments_2 is called course
+#specify in the code:
+students_2 |>
+  left_join(enrollments_2, join_by(class==course))
+```
+
+```{r eval = FALSE}
+#order matters; switch the keys, then we get an error
+students_2 |>
+  left_join(enrollments_2, join_by(course==class))
+```
+
+###Part c
+```{r}
+#add grade in each course information
+students_3 <- data.frame(
+  student = c("Y", "Y", "Z", "Z"), 
+  class = c("COMP 101", "BIOL 101", "POLI 101", "COMP 101"), 
+  grade = c("B", "S", "C", "A")
+)
+students_3
+```
+
+```{r}
+enrollments_3 <- data.frame(
+  class = c("ART 101", "BIOL 101", "COMP 101"), 
+  grade = c("B", "A", "A-"),
+  enrollment = c(20, 18, 19)
+)
+enrollments_3
+```
+
+```{r}
+#try left_join()
+students_3 |>
+  left_join(enrollments_3)
+#not enough shared values in the key?
+#due to dataset having 2 column names in common: class & grade. However, grade in students_3 is measuring individual student grades, while in enrollments_3 it's measuring average student grades.
+```
+
+###Part d
+```{r}
+#to rectify this, specify that class is the key
+students_3 |>
+  left_join(enrollments_3, join_by(class==class))
+#grades.x show that grades from students_3 (individual grades), grades.y show the grades from enrollment_3 (average grades)
+```
+
+
+##Exercise 2: More small practice
+
+```{r}
+#people who have voted
+voters <- data.frame(
+  id = c("A", "D", "E", "F", "G"),
+  times_voted = c(2, 4, 17, 6, 20)
+)
+voters
+```
+
+```{r}
+#contact info for voting age adults
+contact <- data.frame(
+  name = c("A", "B", "C", "D"),
+  address = c("summit", "grand", "snelling", "fairview"),
+  age = c(24, 89, 43, 38)
+)
+contact
+```
+
+For following problems: What dataset goes on the left? What do you want the resulting dataset to look like? How many columns and rows will it have?
+
+```{r}
+#contact info for people who haven't voted
+contact |>
+  anti_join(voters, join_by(name ==id))
+#shows the name values in contact that aren't in voters (B and C are names not in voters, where it shows the number of times the each id/person voted, so we assume they didn't)
+```
+
+```{r}
+#contact info for people who have voted 
+voters |>
+  anti_join(contact, join_by(id == name))
+#shows the two columns from voters, and the three rows of id that aren't present in contact
+```
+
+```{r}
+#any data available on each person
+voters |>
+  full_join(contact, join_by(id ==name))
+```
+
+```{r}
+#when applicable, add contact info to voting roster
+voters |>
+  left_join(contact, join_by(id == name))
+```
+
+
+##Exercise 3: Bigger datasets
+
+```{r}
+# Get rid of some duplicate rows!
+grades <- read.csv("https://mac-stat.github.io/data/grades.csv") |> 
+  distinct(sid, sessionID, .keep_all = TRUE)
+head(grades)
+```
+
+```{r}
+courses <- read.csv("https://mac-stat.github.io/data/courses.csv")
+head(courses)
+```
+
+```{r}
+nrow(grades)
+nrow(courses)
+ncol(grades)
+ncol(courses)
+#There are 5844 rows in grades and 1718 rows in courses
+#There are 3 columns in grades and 6 columns in courses
+```
+
+
+##Exercise 4: Class size
+
+###Part a
+```{r}
+#some of the classes in are listed twice in courses
+courses |>
+  count(sessionID) |>
+  filter(n >1)
+```
+
+```{r}
+#some of these classes are cross-listed with multiple departments
+courses |>
+  filter(sessionID == "session2047")
+```
+
+```{r}
+#total enrollments in each sessionID, combine cross-listed sections
+courses_combined <- courses |>
+  group_by(sessionID) |>
+  summarize(enroll=sum(enroll))
+dim(courses_combined)
+```
+
+###Part b
+Calc mean class size across all sections
+```{r}
+courses_combined |>
+  summarise(median(enroll))
+#median is 18
+```
+
+###Part c
+Calc median class size for each student
+Need both datasets, probably grades as left table, courses_combined as right, probably left_join
+```{r}
+student_class_size <- grades |>
+  left_join(courses_combined, join_by(sessionID == sessionID)) |>
+  group_by(sid) |>
+  summarise(med_class_size = median(enroll))
+head(student_class_size)
+```
+
+###Part d
+Histogram of median class sizes
+```{r}
+student_class_size |>
+  ggplot(aes(x = med_class_size)) +
+  geom_histogram(col = "white")
+```
+
+
+##Exercise 5: Narrowing in on classes
+
+###Part a

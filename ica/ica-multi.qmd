@@ -179,7 +179,7 @@ ggplot(weather, aes(x = raintoday, fill = raintomorrow)) +
 ```
 
 
-## Exercise
+## Exercise 0
 
 ```{r}
 # Import and check out data
@@ -188,11 +188,84 @@ head(education)
 ```
 
 
-
+## Exercise 1
 
 ```{r}
-ggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) + 
+ggplot(education, aes(x = sat)) +
+  geom_histogram()
+```
+
+
+## Exercise 2 
+
+Part a
+```{r}
+# Construct a plot of sat vs expend
+# Include a "best fit linear regression model" (HINT: method = "lm")
+ggplot(education, aes(x=sat, y=expend))+
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+```{r}
+# Construct a plot of sat vs salary
+# Include a "best fit linear regression model" (HINT: method = "lm")
+ggplot(education, aes(x=sat, y=salary))+
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+Part b
+It is surprising that with both expenditure and salary, SAT scores increase when they decrease.
+
+
+## Exercise 3
+
+```{r}
+ggplot(education, aes(x=sat, y=expend, col = salary))+
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+
+## Exercise 4
+
+```{r}
+ggplot(education, aes(y = sat, x = salary, color = cut(expend, 3))) + 
   geom_point() + 
   geom_smooth(se = FALSE, method = "lm")
 ```
+
+
+## Exercise 5
+
+Part a
+```{r}
+ggplot(education, aes(x = fracCat)) +
+  geom_bar()
+```
+
+Part b
+```{r}
+ggplot(education, aes(x = fracCat, y= sat)) +
+  geom_boxplot()
+```
+
+```{r}
+ggplot(education, aes(x= sat)) +
+  geom_histogram(col = "white", binwidth = 50) +
+  facet_wrap(~ fracCat)
+```
+
+Part c
+```{r}
+ggplot(education, aes(x= sat, y = expend, col = fracCat)) +
+  geom_point()
+# It seems that states where less students take the SAT spend way more on each student and also have lower SAT score than the states thats that have higher scores, lower spending, and with more students taking the SAT. 
+```
+
+Part d
+It seemed that SAT scores increased when less money was spent on students. However, when the plot is split into three by the percentage of students that actually took the SAT, we see that lower SAT scores were correlated with higher spending in states that had fewer students taking the SAT. States that had more students taking the SAT seems to show no relationship between expenditure and SAT scores.
+
+
+## Exercise 5.4
 

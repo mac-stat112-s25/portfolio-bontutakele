@@ -24,7 +24,7 @@ library(ggplot2)
 # Make a ggplot
 ggplot(survey, aes(x = hangout)) +
   geom_bar(fill = "darkgreen") + 
-  labs(x = "Hangout Spot Preferences", y = "Amount of students")
+  labs(x = "Hangout Spot Preferences", y = "Amount of students") 
 
 # There is a lot of variation between the preferences. Beach and mountains were the most popular options, with prairie being the least
 ```

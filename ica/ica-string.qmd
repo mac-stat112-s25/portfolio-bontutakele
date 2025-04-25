@@ -1,0 +1,161 @@
+---
+title: "ica-string"
+format: html
+---
+
+13 Strings
+
+
+#13.1 Review
+
+
+Last day of data prep unit
+
+
+#13.2 Strings
+
+
+In factors, we converted character variables to factors and factors to meaningful factors
+
+Now, strings
+To detect, replace, extract certain patterns
+Can be used to analyze sentiments, word counts, typical word length, most common words, etc.
+
+Essential Functions: 
+stringr package within tidyverse has functions to process strings
+Most common (x is a string variable): 
+str_replace(); arguments: x, pattern, replacement; returns: modified string
+str_replace_all(); arguments: x, pattern, replacement; returns: modified string
+str_to_lower(); arguments: x; returns: modified string
+str_sub(); arguments: x, start, end; returns: modified string
+str_length(); arguments: x; returns: a number
+str_detect(); arguments: x, pattern; returns: TRUE/FALSE
+
+
+##Example 1
+
+```{r}
+library(tidyverse)
+
+classes <- data.frame(
+  sem = c("SP2023", "FA2023", "SP2024"),
+  area = c("History", "Math", "Anthro"), 
+  enroll = c("30 - people", "20 - people", "25 - people"), 
+  instructor = c("Ernesto Capello", "Lori Ziegelmeier", "Arjun Guneratne")
+)
+
+classes
+```
+
+```{r}
+#use the functions to:
+#define new variable "num" that adds number of characters in area label
+classes |>
+  mutate(num = str_length(area))
+
+#change areas to all lower case
+classes |>
+  mutate(area = str_to_lower(area))
+
+#create variable that identifies courses taught in spring
+classes |>
+  mutate(spring = str_detect(sem, "SP"))
+
+#change semester variable to full season name, all lower case
+classes |>
+  mutate(sem = str_replace(sem, "SP", "spring"),
+         sem = str_replace(sem, "FA", "fall"))
+
+#in enroll variable, change all e's to 3
+classes |>
+  mutate(enroll = str_replace_all(enroll, "e", "3"))
+
+#create 2 new variables, one with on semester, one with only year
+classes |>
+  mutate(semester = str_sub(sem, 1,2),
+         year = str_sub(sem, 3,6))
+```
+
+#Summary
+
+str_replace(x, pattern, replacement): finds first part x that matches pattern, replaces it
+str_replace_all(x, pattern, replacement): finds all instances in x that matches pattern, replaces it
+str_to_lower(x): all upper case in x to lower case
+str_sub(x, start, end): keeps on subset of characters in x, from start (the number indexing the first character to keep) to end (the number indicating hte last character to keep)
+str_length(x): records the number of characters in x
+str_detect(x, pattern): if x contains the given pattern, TRUE, otherwise FALSE
+
+
+#13.2.1 Example 2 
+
+```{r}
+#if we only want spring courses
+#use mutate
+classes |>
+  mutate(spring = str_detect(sem, "SP"))
+```
+
+```{r}
+#without mutating
+classes |>
+  filter(str_detect(sem, "SP"))
+```
+
+```{r}
+#by omitting fall courses
+classes |>
+  filter(!str_detect(sem, "FA"))
+```
+
+#13.2.2 Example 3
+
+
+```{r}
+classes |>
+  mutate(last = str_sub(instructor, " ", 12))
+#bruh
+```
+
+#13.2.3 Example 4
+
+
+```{r}
+#generally, use separate() to split column in 2
+classes |>
+  separate(instructor, c("first", "last"), sep = " ")
+```
+
+```{r}
+#separate() can sometimes 'intuit' how we want to separate the variable
+classes |>
+  separate(instructor, c("first", "last"))
+```
+
+a. Separate enroll into 2 columns, students and people
+```{r}
+classes |>
+  separate(enroll, c("students", "people"), sep = "-")
+```
+
+b. Would be harder to separate sem variable using separate(), rather than str_sub(), because there is no character between the season and year to indicate where to separate
+
+c. When we want to split a column into 2 new columns, but there is no consistent patter, we use REGULAR EXPRESSIONS
+```{r}
+#(?<=[SP|FA]): any character before the split point is is a "SP" or "FA"
+#(?=2): the first character after the split point is a 2
+classes |>
+  separate(sem, 
+           c("semester", "year"),
+           "(?<=[SP|FA])(?=2)")
+```
+
+```{r}
+#more general:
+#(?<=[a-zA-Z]): any character before the split point is lower or uppercase
+#(?=[0-9]): any character after the split point is a number
+classes|>
+  separate(sem,
+           c("semester", "year"),
+           "(?<=[a-zA-Z])(?=[0-9])")
+```
+

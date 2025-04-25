@@ -31,13 +31,19 @@ book:
       - bw/bw-quad.qmd
       - bw/bw-spatial.qmd
 
-    - part: "In-class Activities"
-      chapters: 
-      - ica/ica-uni.qmd
-      - ica/ica-bi.qmd
-      - ica/ica-multi.qmd
-      - ica/ica-spatial.qmd
-      - ica/ica-effect.qmd
+    # - part: "In-class Activities"
+    #   chapters: 
+    #   - ica/ica-uni.qmd
+    #   - ica/ica-bi.qmd
+    #   - ica/ica-multi.qmd
+    #   - ica/ica-spatial.qmd
+    #   - ica/ica-effect.qmd
+    #   - ica/ica-wrangling.qmd
+    #   - ica/ica-date.qmd
+    #   - ica/ica-reshape.qmd
+    #   - ica/ica-join.qmd
+    #   - ica/ica-factor.qmd
+    #   - ica/ica-string.qmd
 
 format:
   html:

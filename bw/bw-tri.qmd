@@ -3,3 +3,20 @@ title: "Trivariate Viz"
 ---
 
 Use this file to generate a professional looking **trivariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r message = FALSE, echo = FALSE, warning= FALSE}
+library(tidyverse)
+education <- read.csv("https://mac-stat.github.io/data/sat.csv")
+```
+
+
+```{r}
+#|fig-cap: "Avergae SAT Scores of Each State vs. The Expense per Student, Categorized by Percentage of Students Taking the SAT"
+ggplot(education, aes(x= sat, y = expend, col = fracCat)) +
+  geom_point() +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_color_viridis_d(name = "% of SAT Students", labels = c("0-15%","15-45%","45-100%")) +
+  labs(x = "Average SAT Score", y = "Expense per Student") +
+  theme_bw() 
+```
+

@@ -1,0 +1,169 @@
+---
+title: "exam-two"
+format: html
+---
+
+#2
+#2.2,2.3
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+library(rnaturalearth)
+library(sf)
+library(ggplot2)
+fc <- tt_load('2020-02-18')
+fc <- fc$food_consumption
+```
+
+#2.4 Inspection
+```{r}
+str(fc)
+head(fc,22)
+```
+
+##2.6 Inspect Food
+```{r}
+fc|>
+  distinct(food_category) |>
+  mutate(row_number())
+```
+
+::: The problem with the food cateogry values is that they are not in snake case, have special characters and spaces, which makes the set hard to work with.
+
+##2.7 Fix Food
+```{r}
+fcc <- fc|>
+  mutate(food_category = fct_recode(food_category, 
+                                     "Lamb" = "Lamb & Goat", 
+                                     "Dairy" = "Milk - inc. cheese", 
+                                     "Wheat" = "Wheat and Wheat Products",
+                                     "Nuts" = "Nuts inc. Peanut Butter"))
+```
+
+##2.8 Reinspect
+```{r}
+fcc |>
+  distinct(food_category) |>
+  mutate(row_number())
+```
+
+#Most Consuming Countries
+## Research Question: **Which 5 countries consume the most food?**
+
+#3.1 Shape
+```{r}
+#| fig-width: 10
+fc |>
+  select(consumption, country) |>
+  group_by(country) |>
+  summarise(consumption_sum = sum(consumption)) |>
+  arrange(desc(consumption_sum)) |>
+  head(5) |>
+  ggplot(aes(x = country, y = consumption_sum)) +
+  geom_col()
+```
+
+##3.3 Viz
+
+::: Most appropriate is geom_col, boxplot and violin only if you are including all consumption data points, not the sum total
+
+
+#4 Most Consuming of Each Food
+#RQ2: **Which top 5 countries consume each food?**
+
+```{r}
+fc |>
+  group_by(food_category) |>
+  summarise(consum = sum(consumption), country) |>
+  slice_max(order_by = consum, n = 5, with_ties = FALSE) |>
+  select(food_category, country, consum) %>%
+  arrange(food_category, desc(consum))
+```
+
+##4.3 Viz
+
+::: Appropriate graphs: geom_col with faceting, coloring, or positioning (dodged,stack or fill)
+
+#5 Food Consumption
+#RQ3: **What does the consumption of each food look like?**
+
+##5.1 Shape
+```{r}
+ne_countries(returnclass = "sf") |>
+  #gathers features of countries
+  select(name, geometry) |>
+  #selecting only names of countries and geoms
+  left_join(fcc |> select(-co2_emmission), 
+            #joining the tt dataset to the sf dataset
+            join_by(name == country)) |>
+            #key
+  ggplot() +
+  #plot
+  geom_sf(aes(fill = consumption)) +
+  #country shapes, consumption values filled in
+  facet_wrap(~food_category) +
+  #each category gets it's own graph
+  theme(legend.position = "bottom")
+  #puts legend at the bottom
+```
+
+##5.5 Viz Attempt 2
+```{r}
+ne_countries(returnclass = "sf") |>
+  select(name, geometry) |>
+  mutate(name = ifelse(name == "United States of America", "USA", name)) |>
+  mutate(name = ifelse(name == "Bosnia and Herz", "Bosnia and Herzegovina", name)) |>
+  mutate(name = ifelse(name == "Czechia", "Czech Republic", name)) |>
+  mutate(name = ifelse(name == "Taiwan", "Taiwan. ROC", name)) |>
+  left_join(fcc |> select(-co2_emmission),
+              join_by(name == country)) |>
+        pivot_wider(names_from = food_category,
+                          values_from = consumption) |>
+  select(-"NA") |>
+  pivot_longer(cols = c(-name, -geometry),
+               names_to = "food_category",
+               values_to = "consumption") |>
+ggplot() +
+  geom_sf(aes(fill = consumption)) +
+  facet_wrap(~food_category) +
+  theme(legend.position = "bottom")
+```
+
+::: 1-4 mutates the name column so that the values (certain country names) in the sf dataset match those of the fc dataset. 5 makes the food category values into columns, with their values coming from the values in their row under the consumption column. 6,7 not sure what these do.
+
+
+#5.6 Food Consumption Stats
+```{r}
+fcc |>
+  group_by(food_category) |>
+  summarise(min = min(consumption), max = max(consumption), range = round(max-min)) |>
+  arrange(desc(range))
+```
+
+##5.7 Viz 3
+```{r}
+ne_countries(returnclass = "sf") |>
+  select(name, geometry) |>
+  mutate(name = ifelse(name == "United States of America", "USA", name)) |>
+  mutate(name = ifelse(name == "Bosnia and Herz", "Bosnia and Herzegovina", name)) |>
+  mutate(name = ifelse(name == "Czechia", "Czech Republic", name)) |>
+  mutate(name = ifelse(name == "Taiwan", "Taiwan. ROC", name)) |>
+  left_join(
+    fcc |> 
+      select(-co2_emmission) |>
+      group_by(food_category) |>
+      mutate(consumption = (consumption - mean(consumption))/sd(consumption)),
+              join_by(name == country)) |>
+        pivot_wider(names_from = food_category,
+                          values_from = consumption) |>
+  select(-"NA") |>
+  pivot_longer(cols = c(-name, -geometry),
+               names_to = "food_category",
+               values_to = "consumption") |>
+ggplot() +
+  geom_sf(aes(fill = consumption)) +
+  facet_wrap(~food_category) +
+  theme(legend.position = "bottom")
+```
+
+::: The viz can be more effective by making consumptiona a discrete variable, so we can see the difference between countries' consumptions better

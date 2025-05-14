@@ -3,3 +3,21 @@ title: "Quadvariate Viz"
 ---
 
 Use this file to generate a professional looking **quadvariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r message = FALSE, echo = FALSE, warning= FALSE}
+library(dplyr)
+library(ggplot2)
+weather <- read.csv("https://mac-stat.github.io/data/weather_3_locations.csv") |> 
+  mutate(date = as.Date(date))  
+```
+
+```{r, warning=FALSE}
+#| fig-cap: "Humidity and Temperature Measurements at 9am, 2020-2022, in Hobart, Ulruru, and Wollongong"
+ggplot(weather, aes(x = date)) + 
+  geom_point(aes(y = temp9am), col = "orange", size = .3) +
+  geom_point(aes(y = humidity9am), size = .5) +
+  facet_wrap(~ location) +
+  theme_bw() +
+  labs(x = "Date at Measurement", y = "Humidity (%)/Temperature(C) at 9am")
+```
+

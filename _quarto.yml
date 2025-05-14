@@ -4,7 +4,7 @@ project:
 
 book:
   title: "COMP/STAT112 Notebook"
-  author: "Your Name Here"
+  author: "Bontu Takele"
   date: today
   reader-mode: true
   page-navigation: true
@@ -13,7 +13,7 @@ book:
   
   
   sidebar:
-    title: "Your Name Here"
+    title: "Bontu Takele"
     collapse-level: 2
     style: "docked"
     pinned: true
@@ -30,6 +30,13 @@ book:
       - bw/bw-tri.qmd
       - bw/bw-quad.qmd
       - bw/bw-spatial.qmd
+      - bw/exam-one.qmd
+      - bw/exam-two.qmd
+    
+    - part: "Summary Sheets"
+      chapters: 
+        - ss/e1.qmd
+        - ss/e2.qmd
 
     # - part: "In-class Activities"
     #   chapters: 

@@ -3,3 +3,18 @@ title: "Univariate Viz"
 ---
 
 Use this file to generate a professional looking **univariate** visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r message = FALSE, echo = FALSE, warning= FALSE}
+library(tidyverse)
+library(ggplot2)
+hikes <- read.csv("https://mac-stat.github.io/data/high_peaks.csv")
+```
+
+```{r}
+#|fig-cap: "Number of Hikes in Each Rating in the High Peaks Dataset"
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(color = "orange", fill = "blue")  +
+  labs(x = "Difficult Rating of Hikes", y = "Number of Hikes") +
+  theme_minimal()
+```
+

@@ -173,9 +173,11 @@ gafrica <- ne_countries(continent = 'Africa', returnclass = 'sf')
 
 Part b
 ```{r}
+library(ggplot2)
 # What does this code produce?
 # What geom are we using for the point map?
 # Geom simple feature format
+world_boundaries <- ne_countries(state = "Alaska", returnclass = "sf")
 ggplot(world_boundaries) + 
   geom_sf()
 ```

@@ -3,3 +3,26 @@ title: "Bivariate Viz"
 ---
 
 Use this file to generate a professional looking **bivariate** visualization.  The visualization will not perfect the first time but you are expected to improve it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r message = FALSE, echo = FALSE, warning= FALSE}
+library(ggplot2)
+library(dplyr)
+library(forcats)
+elections <- read.csv("https://mac-stat.github.io/data/election_2020_county.csv")
+elections <- elections |>
+  mutate(historical = fct_recode(historical,
+                                 "Democrat" = "blue",
+                                  "About Equal" = "purple",
+                                    "Republican" = "red"))
+```
+
+
+```{r}
+#|fig-cap: "Republican Voting Percentage in Counties in 2020, and their Previous Years' Political Trend"
+ggplot(elections, aes(x = repub_pct_20, fill = historical)) +
+  geom_density(alpha = 0.5) +
+  labs(x = "Republican Vote Percentage in 2020", y = "Density") +
+  scale_fill_viridis_d(name = "Historical Political Trend") +
+  theme_minimal()
+```
+

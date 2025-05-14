@@ -1,0 +1,90 @@
+---
+title: "e1"
+format: html
+---
+
+Univariate Visualization (Viz)
+Benefits of Visualization: Understand what we’re working with scales & typical outcomes, outliers, patterns & relationships. Refine research questions, inform next steps of analysis. Communicate findings, tell a story.
+Components of graphics include: 
+a frame, or coordinate system. axes and gridlines. 
+a layer, geometric elements (e.g. lines, points) that represent data points or patterns of data points. Each type of geometric element is a separate layer, sometimes called “geoms” or “glyphs”
+scales, added to geometric elements (e.g. color, size, shape), additional information about data scales or groups.
+faceting, splitting up of the data into multiple subplots, or facets, to examine different groups within the data
+a theme, plot aesthetics, (e.g. font type, background, color scheme).
+Bivariate Viz 
+Bivariate Viz
+For looking at 2 variables and the relationship between them
+Variable Roles
+	Response: variability we would like to explain (time to complete a hike)
+Predictor: explains some of the variability in the response (a hike’s elevation or length)
+Bivariate visualization explore:
+relationship trends (direction and form)
+relationship strength (degree of variability from the trend)
+outliers in the relationship
+How to plot bivariate
+Quantitative variable requires a new axis (or a quantitative scale if out of axes).
+Categorical variable requires a new way to “group” the graphic (colors, shapes, separate facets, etc)
+For visualizations in which overlap in glyphs or plots obscures the patterns, faceting or transparency.
+
+Multivariate Viz
+Fill can be used to add a third variable
+Bar graph is good for comparing variables side by side
+Proportional bar/filled bar allows for comparison of the proportions of a variable
+SUBTLETIES: Defining fill or color by a variable
+
+How we define the fill or color depends upon whether we’re defining it by a named color or by some variable in our dataset. For example:
+geom___(fill = "blue")
+named colors are defined outside the aesthetics and put in quotes
+geom___(aes(fill = variable)) or ggplot(___, aes(fill = variable))
+colors/fills defined by a variable are defined inside the aesthetics
+
+Along with all the components of graphics we’ve used, we now need scales
+Scales: changes color, fill, size, shape, etc. according to levels of new (third) variable
+
+Spatial Viz
+Plot data points on top of a map using ggplot().
+Create choropleth maps using geom_map().
+Understand basics of mapping using leaflet, adding points and choropleths to a base map.
+For spatial viz:
+Data set needs:
+Point maps need location coordinates for points of interest
+Choropleth maps need variable outcomes for regions of interest
+Background map needs: 
+Latitude and longitude coordinates to specify boundaries for regions of interest (eg: countries, states)
+County-level, state-level, country-level, continent-level info live in multiple places.
+Wrangled data to match background map
+Leaflet: Open-source JavaScript library for creating maps. uses different plotting framework than ggplot2, but still has tidyverse feel 
+Steps:
+Create map widget by calling leaflet() and telling it the data
+Add base map using addTiles() or addProviderTiles().
+Add layers to map using layer functions like addMarkers or addPolygons()).
+Print map widget to display it
+
+Effective Viz
+Ineffective: 
+Wrong - “objectively incorrect” viz, numbers/trends displayed wrong
+Bad - “unclear, confusing, overly complicated, deceiving”
+Ugly - correct & clear, but problematic aesthetics
+The basics
+Professionalism
+meaningful axis labels
+figure caption
+Accessibility
+have “alt text” - written description of the viz that can be read out by a screen reader (video)
+color palette distinguishable across common forms of color blindness
+Design Details
+think about comparison. 
+make it easy for people to perceive things that are similar and that are different.
+Ethics
+should not mislead, i.e. “wrong” viz are unethical
+Correll’s 3 principles
+Visibility: hidden labor, uncertainty, impacts. Credit sources, data
+Privacy: Collect data with empathy. Encourage small Data, anthropomorphize data, obfuscate data to protect privacy.
+Power: Challenge structures of power. Support data due process, act as data advocates, pressure unethical analytical behavior.
+D’Ignazio & Klein data feminism
+Emotion & Embodiment: Value multiple forms of knowledge, including the knowledge that comes from people as living, feeling bodies in the world.
+Pluralism: the most complete knowledge comes from synthesizing multiple perspectives
+Context: Data are not neutral or objective
+
+
+

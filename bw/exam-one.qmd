@@ -1,0 +1,75 @@
+---
+title: "exam-one"
+format: html
+---
+
+#1,2,3,4
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+fc <- tt_load('2020-02-18')
+fc <- fc$food_consumption
+```
+
+#1.2 Grand Research Question
+## **What does the consumption of each food category in each country look like?**
+
+#5 Understanding
+```{r}
+dim(fc)
+head(fc)
+tail(fc)
+str(fc)
+```
+
+#6 Exploring
+```{r}
+head(fc,22)
+tail(fc,22)
+```
+::: Units: country, food category, consumption and CO2 emmission. 11 food categories and 130 countries. The univariate viz for food categories and countries is bar graph, and for consumption is density graph or histogram.
+
+
+#7 Individual Variables
+
+::: The grand research question involves 3 variables, country, food category and consumption
+
+
+#8 Consumption
+```{r}
+fc |> 
+  ggplot(aes(x = food_category, y= consumption)) +
+  geom_boxplot() +
+  scale_x_discrete(guide = guide_axis(n.dodge = 2))
+```
+
+```{r}
+fc |>
+  filter(country %in% c("Argentina", "Australia", "Liberia", "Bangladesh")) |>
+  ggplot(aes(x = country, y = consumption)) +
+  geom_violin()
+```
+
+#9 Answering GRQ
+```{r}
+#| fig-height:  11
+#| fig-width: 11
+#reduced number of countries for clarity sake, one of the many challenges with this dataset
+fc |>
+  mutate(a_country = str_detect(country, "A")) |>
+  filter(a_country == TRUE) |>
+  ggplot(aes(x = food_category, y = consumption, col = country)) +
+  geom_point()  +
+  scale_x_discrete(guide = guide_axis(n.dodge = 3))
+```
+
+#10 Beyond Viz
+##10.1 Effectiveness
+
+::: Concepts that should be applied to final viz for effectiveness: labels (labs()), alt text (fig-cap, fig-alt), colorblind-friendly colors (scale_fill_viridis_d()), graph theme (theme_classic/bw/minimal/etc.()), legend (theme())
+
+##10.2 Additional Questions
+
+::: Follow-ups: How do CO2 emmissions differ between food groups? Is there a correlation between a country's consumption and their emissions, and how does it vary between countries?
+

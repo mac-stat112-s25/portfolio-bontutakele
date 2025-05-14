@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>1&nbsp; Univariate Viz – COMP/STAT112 Notebook</title>
+
+
+<title>8&nbsp; e1 – COMP/STAT112 Notebook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -53,14 +56,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../bw/bw-bi.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../ss/e2.html" rel="next">
+<link href="../bw/exam-two.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,7 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -97,25 +102,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="../style/custom.css">
+}</script>
+
+
+<link rel="stylesheet" href="../style/custom.css">
 </head>
+
 <body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/bw-uni.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Univariate Viz</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ss/e1.html">Summary Sheets</a></li><li class="breadcrumb-item"><a href="../ss/e1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">e1</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Bontu Takele</a> 
         <div class="sidebar-tools-main">
@@ -135,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
@@ -149,10 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../bw/bw-uni.html" class="sidebar-item-text sidebar-link active">
+  <a href="../bw/bw-uni.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Univariate Viz</span></span></a>
   </div>
 </li>
@@ -193,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -202,10 +217,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ss/e1.html" class="sidebar-item-text sidebar-link">
+  <a href="../ss/e1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">e1</span></span></a>
   </div>
 </li>
@@ -216,19 +231,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/bw-uni.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Univariate Viz</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Univariate Viz</span>
-</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ss/e1.html">Summary Sheets</a></li><li class="breadcrumb-item"><a href="../ss/e1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">e1</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">e1</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -242,26 +259,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>Use this file to generate a professional looking <strong>univariate</strong> visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#|fig-cap: "Number of Hikes in Each Rating in the High Peaks Dataset"</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">ggplot</span>(hikes, <span class="fu">aes</span>(<span class="at">x =</span> rating)) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>)  <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Difficult Rating of Hikes"</span>, <span class="at">y =</span> <span class="st">"Number of Hikes"</span>) <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="bw-uni_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+</header>
+
+
+<p>Univariate Visualization (Viz) Benefits of Visualization: Understand what we’re working with scales &amp; typical outcomes, outliers, patterns &amp; relationships. Refine research questions, inform next steps of analysis. Communicate findings, tell a story. Components of graphics include: a frame, or coordinate system. axes and gridlines. a layer, geometric elements (e.g.&nbsp;lines, points) that represent data points or patterns of data points. Each type of geometric element is a separate layer, sometimes called “geoms” or “glyphs” scales, added to geometric elements (e.g.&nbsp;color, size, shape), additional information about data scales or groups. faceting, splitting up of the data into multiple subplots, or facets, to examine different groups within the data a theme, plot aesthetics, (e.g.&nbsp;font type, background, color scheme). Bivariate Viz Bivariate Viz For looking at 2 variables and the relationship between them Variable Roles Response: variability we would like to explain (time to complete a hike) Predictor: explains some of the variability in the response (a hike’s elevation or length) Bivariate visualization explore: relationship trends (direction and form) relationship strength (degree of variability from the trend) outliers in the relationship How to plot bivariate Quantitative variable requires a new axis (or a quantitative scale if out of axes). Categorical variable requires a new way to “group” the graphic (colors, shapes, separate facets, etc) For visualizations in which overlap in glyphs or plots obscures the patterns, faceting or transparency.</p>
+<p>Multivariate Viz Fill can be used to add a third variable Bar graph is good for comparing variables side by side Proportional bar/filled bar allows for comparison of the proportions of a variable SUBTLETIES: Defining fill or color by a variable</p>
+<p>How we define the fill or color depends upon whether we’re defining it by a named color or by some variable in our dataset. For example: geom_<strong>(fill = “blue”) named colors are defined outside the aesthetics and put in quotes geom</strong>_(aes(fill = variable)) or ggplot(___, aes(fill = variable)) colors/fills defined by a variable are defined inside the aesthetics</p>
+<p>Along with all the components of graphics we’ve used, we now need scales Scales: changes color, fill, size, shape, etc. according to levels of new (third) variable</p>
+<p>Spatial Viz Plot data points on top of a map using ggplot(). Create choropleth maps using geom_map(). Understand basics of mapping using leaflet, adding points and choropleths to a base map. For spatial viz: Data set needs: Point maps need location coordinates for points of interest Choropleth maps need variable outcomes for regions of interest Background map needs: Latitude and longitude coordinates to specify boundaries for regions of interest (eg: countries, states) County-level, state-level, country-level, continent-level info live in multiple places. Wrangled data to match background map Leaflet: Open-source JavaScript library for creating maps. uses different plotting framework than ggplot2, but still has tidyverse feel Steps: Create map widget by calling leaflet() and telling it the data Add base map using addTiles() or addProviderTiles(). Add layers to map using layer functions like addMarkers or addPolygons()). Print map widget to display it</p>
+<p>Effective Viz Ineffective: Wrong - “objectively incorrect” viz, numbers/trends displayed wrong Bad - “unclear, confusing, overly complicated, deceiving” Ugly - correct &amp; clear, but problematic aesthetics The basics Professionalism meaningful axis labels figure caption Accessibility have “alt text” - written description of the viz that can be read out by a screen reader (video) color palette distinguishable across common forms of color blindness Design Details think about comparison. make it easy for people to perceive things that are similar and that are different. Ethics should not mislead, i.e.&nbsp;“wrong” viz are unethical Correll’s 3 principles Visibility: hidden labor, uncertainty, impacts. Credit sources, data Privacy: Collect data with empathy. Encourage small Data, anthropomorphize data, obfuscate data to protect privacy. Power: Challenge structures of power. Support data due process, act as data advocates, pressure unethical analytical behavior. D’Ignazio &amp; Klein data feminism Emotion &amp; Embodiment: Value multiple forms of knowledge, including the knowledge that comes from people as living, feeling bodies in the world. Pluralism: the most complete knowledge comes from synthesizing multiple perspectives Context: Data are not neutral or objective</p>
 
 
 <!-- -->
 
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -880,39 +893,111 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Welcome">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../bw/exam-two.html" class="pagination-link" aria-label="exam-two">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">exam-two</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../bw/bw-bi.html" class="pagination-link" aria-label="Bivariate Viz">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bivariate Viz</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ss/e2.html" class="pagination-link" aria-label="e2">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">e2</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> "Univariate Viz"</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">---</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>Use this file to generate a professional looking **univariate** visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="in">```{r message = FALSE, echo = FALSE, warning= FALSE}</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="in">hikes &lt;- read.csv("https://mac-stat.github.io/data/high_peaks.csv")</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="in">```</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="in">```{r}</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#|fig-cap: "Number of Hikes in Each Rating in the High Peaks Dataset"</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="fu">ggplot</span>(hikes, <span class="fu">aes</span>(<span class="at">x =</span> rating)) <span class="sc">+</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>)  <span class="sc">+</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Difficult Rating of Hikes"</span>, <span class="at">y =</span> <span class="st">"Number of Hikes"</span>) <span class="sc">+</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "e1"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>Univariate Visualization (Viz)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>Benefits of Visualization: Understand what we’re working with scales &amp; typical outcomes, outliers, patterns &amp; relationships. Refine research questions, inform next steps of analysis. Communicate findings, tell a story.</span>
+<span id="cb1-8"><a href="#cb1-8"></a>Components of graphics include: </span>
+<span id="cb1-9"><a href="#cb1-9"></a>a frame, or coordinate system. axes and gridlines. </span>
+<span id="cb1-10"><a href="#cb1-10"></a>a layer, geometric elements (e.g. lines, points) that represent data points or patterns of data points. Each type of geometric element is a separate layer, sometimes called “geoms” or “glyphs”</span>
+<span id="cb1-11"><a href="#cb1-11"></a>scales, added to geometric elements (e.g. color, size, shape), additional information about data scales or groups.</span>
+<span id="cb1-12"><a href="#cb1-12"></a>faceting, splitting up of the data into multiple subplots, or facets, to examine different groups within the data</span>
+<span id="cb1-13"><a href="#cb1-13"></a>a theme, plot aesthetics, (e.g. font type, background, color scheme).</span>
+<span id="cb1-14"><a href="#cb1-14"></a>Bivariate Viz </span>
+<span id="cb1-15"><a href="#cb1-15"></a>Bivariate Viz</span>
+<span id="cb1-16"><a href="#cb1-16"></a>For looking at 2 variables and the relationship between them</span>
+<span id="cb1-17"><a href="#cb1-17"></a>Variable Roles</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    Response: variability we would like to explain (time to complete a hike)</span>
+<span id="cb1-19"><a href="#cb1-19"></a>Predictor: explains some of the variability in the response (a hike’s elevation or length)</span>
+<span id="cb1-20"><a href="#cb1-20"></a>Bivariate visualization explore:</span>
+<span id="cb1-21"><a href="#cb1-21"></a>relationship trends (direction and form)</span>
+<span id="cb1-22"><a href="#cb1-22"></a>relationship strength (degree of variability from the trend)</span>
+<span id="cb1-23"><a href="#cb1-23"></a>outliers in the relationship</span>
+<span id="cb1-24"><a href="#cb1-24"></a>How to plot bivariate</span>
+<span id="cb1-25"><a href="#cb1-25"></a>Quantitative variable requires a new axis (or a quantitative scale if out of axes).</span>
+<span id="cb1-26"><a href="#cb1-26"></a>Categorical variable requires a new way to “group” the graphic (colors, shapes, separate facets, etc)</span>
+<span id="cb1-27"><a href="#cb1-27"></a>For visualizations in which overlap in glyphs or plots obscures the patterns, faceting or transparency.</span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a>Multivariate Viz</span>
+<span id="cb1-30"><a href="#cb1-30"></a>Fill can be used to add a third variable</span>
+<span id="cb1-31"><a href="#cb1-31"></a>Bar graph is good for comparing variables side by side</span>
+<span id="cb1-32"><a href="#cb1-32"></a>Proportional bar/filled bar allows for comparison of the proportions of a variable</span>
+<span id="cb1-33"><a href="#cb1-33"></a>SUBTLETIES: Defining fill or color by a variable</span>
+<span id="cb1-34"><a href="#cb1-34"></a></span>
+<span id="cb1-35"><a href="#cb1-35"></a>How we define the fill or color depends upon whether we’re defining it by a named color or by some variable in our dataset. For example:</span>
+<span id="cb1-36"><a href="#cb1-36"></a>geom___(fill = "blue")</span>
+<span id="cb1-37"><a href="#cb1-37"></a>named colors are defined outside the aesthetics and put in quotes</span>
+<span id="cb1-38"><a href="#cb1-38"></a>geom___(aes(fill = variable)) or ggplot(___, aes(fill = variable))</span>
+<span id="cb1-39"><a href="#cb1-39"></a>colors/fills defined by a variable are defined inside the aesthetics</span>
+<span id="cb1-40"><a href="#cb1-40"></a></span>
+<span id="cb1-41"><a href="#cb1-41"></a>Along with all the components of graphics we’ve used, we now need scales</span>
+<span id="cb1-42"><a href="#cb1-42"></a>Scales: changes color, fill, size, shape, etc. according to levels of new (third) variable</span>
+<span id="cb1-43"><a href="#cb1-43"></a></span>
+<span id="cb1-44"><a href="#cb1-44"></a>Spatial Viz</span>
+<span id="cb1-45"><a href="#cb1-45"></a>Plot data points on top of a map using ggplot().</span>
+<span id="cb1-46"><a href="#cb1-46"></a>Create choropleth maps using geom_map().</span>
+<span id="cb1-47"><a href="#cb1-47"></a>Understand basics of mapping using leaflet, adding points and choropleths to a base map.</span>
+<span id="cb1-48"><a href="#cb1-48"></a>For spatial viz:</span>
+<span id="cb1-49"><a href="#cb1-49"></a>Data set needs:</span>
+<span id="cb1-50"><a href="#cb1-50"></a>Point maps need location coordinates for points of interest</span>
+<span id="cb1-51"><a href="#cb1-51"></a>Choropleth maps need variable outcomes for regions of interest</span>
+<span id="cb1-52"><a href="#cb1-52"></a>Background map needs: </span>
+<span id="cb1-53"><a href="#cb1-53"></a>Latitude and longitude coordinates to specify boundaries for regions of interest (eg: countries, states)</span>
+<span id="cb1-54"><a href="#cb1-54"></a>County-level, state-level, country-level, continent-level info live in multiple places.</span>
+<span id="cb1-55"><a href="#cb1-55"></a>Wrangled data to match background map</span>
+<span id="cb1-56"><a href="#cb1-56"></a>Leaflet: Open-source JavaScript library for creating maps. uses different plotting framework than ggplot2, but still has tidyverse feel </span>
+<span id="cb1-57"><a href="#cb1-57"></a>Steps:</span>
+<span id="cb1-58"><a href="#cb1-58"></a>Create map widget by calling leaflet() and telling it the data</span>
+<span id="cb1-59"><a href="#cb1-59"></a>Add base map using addTiles() or addProviderTiles().</span>
+<span id="cb1-60"><a href="#cb1-60"></a>Add layers to map using layer functions like addMarkers or addPolygons()).</span>
+<span id="cb1-61"><a href="#cb1-61"></a>Print map widget to display it</span>
+<span id="cb1-62"><a href="#cb1-62"></a></span>
+<span id="cb1-63"><a href="#cb1-63"></a>Effective Viz</span>
+<span id="cb1-64"><a href="#cb1-64"></a>Ineffective: </span>
+<span id="cb1-65"><a href="#cb1-65"></a>Wrong - “objectively incorrect” viz, numbers/trends displayed wrong</span>
+<span id="cb1-66"><a href="#cb1-66"></a>Bad - “unclear, confusing, overly complicated, deceiving”</span>
+<span id="cb1-67"><a href="#cb1-67"></a>Ugly - correct &amp; clear, but problematic aesthetics</span>
+<span id="cb1-68"><a href="#cb1-68"></a>The basics</span>
+<span id="cb1-69"><a href="#cb1-69"></a>Professionalism</span>
+<span id="cb1-70"><a href="#cb1-70"></a>meaningful axis labels</span>
+<span id="cb1-71"><a href="#cb1-71"></a>figure caption</span>
+<span id="cb1-72"><a href="#cb1-72"></a>Accessibility</span>
+<span id="cb1-73"><a href="#cb1-73"></a>have “alt text” - written description of the viz that can be read out by a screen reader (video)</span>
+<span id="cb1-74"><a href="#cb1-74"></a>color palette distinguishable across common forms of color blindness</span>
+<span id="cb1-75"><a href="#cb1-75"></a>Design Details</span>
+<span id="cb1-76"><a href="#cb1-76"></a>think about comparison. </span>
+<span id="cb1-77"><a href="#cb1-77"></a>make it easy for people to perceive things that are similar and that are different.</span>
+<span id="cb1-78"><a href="#cb1-78"></a>Ethics</span>
+<span id="cb1-79"><a href="#cb1-79"></a>should not mislead, i.e. “wrong” viz are unethical</span>
+<span id="cb1-80"><a href="#cb1-80"></a>Correll’s 3 principles</span>
+<span id="cb1-81"><a href="#cb1-81"></a>Visibility: hidden labor, uncertainty, impacts. Credit sources, data</span>
+<span id="cb1-82"><a href="#cb1-82"></a>Privacy: Collect data with empathy. Encourage small Data, anthropomorphize data, obfuscate data to protect privacy.</span>
+<span id="cb1-83"><a href="#cb1-83"></a>Power: Challenge structures of power. Support data due process, act as data advocates, pressure unethical analytical behavior.</span>
+<span id="cb1-84"><a href="#cb1-84"></a>D’Ignazio &amp; Klein data feminism</span>
+<span id="cb1-85"><a href="#cb1-85"></a>Emotion &amp; Embodiment: Value multiple forms of knowledge, including the knowledge that comes from people as living, feeling bodies in the world.</span>
+<span id="cb1-86"><a href="#cb1-86"></a>Pluralism: the most complete knowledge comes from synthesizing multiple perspectives</span>
+<span id="cb1-87"><a href="#cb1-87"></a>Context: Data are not neutral or objective</span>
+<span id="cb1-88"><a href="#cb1-88"></a></span>
+<span id="cb1-89"><a href="#cb1-89"></a></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 
